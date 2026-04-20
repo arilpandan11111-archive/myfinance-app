@@ -1,7 +1,7 @@
 <?php
 ob_start(); 
 session_start();
-// ... sisanya kode login kamu yang kemarin ...
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
     if ($query && mysqli_num_rows($query) === 1) {
         $row = mysqli_fetch_assoc($query);
         
-       )
+       
         if (password_verify($password, $row['password'])) {
             $_SESSION['login'] = true;
             $_SESSION['id_user'] = $row['id']; // Menggunakan 'id' sesuai Screenshot 47
