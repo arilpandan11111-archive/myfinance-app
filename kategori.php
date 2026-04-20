@@ -4,7 +4,6 @@ include 'config.php';
 include 'template/header.php';
 include 'template/sidebar.php';
 
-// Logika Tambah Kategori
 if (isset($_POST['tambah_kategori'])) {
     $nama = $_POST['nama_kategori'];
     $jenis = $_POST['jenis'];
@@ -12,7 +11,7 @@ if (isset($_POST['tambah_kategori'])) {
     header("Location: kategori.php");
 }
 
-// Logika Hapus Kategori
+
 if (isset($_GET['hapus'])) {
     $id = $_GET['hapus'];
     mysqli_query($conn, "DELETE FROM kategori WHERE id = $id");

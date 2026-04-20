@@ -206,7 +206,7 @@ function createChart(ctxId, config) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. Grafik Batang
+    
     createChart('myChart', {
         type: 'bar',
         data: {

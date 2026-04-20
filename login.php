@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 
 include 'config.php';
 
-// Jika sudah login, langsung ke index
+
 if (isset($_SESSION['login'])) {
     header("Location: index.php");
     exit;
@@ -17,13 +17,13 @@ if (isset($_POST['login'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password']; 
 
-    // Mencari di tabel 'users' sesuai database kamu (Screenshot 47)
+    
     $query = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
     
     if ($query && mysqli_num_rows($query) === 1) {
         $row = mysqli_fetch_assoc($query);
         
-        // Verifikasi password hash (karena di daftar.php kamu pakai password_hash)
+       )
         if (password_verify($password, $row['password'])) {
             $_SESSION['login'] = true;
             $_SESSION['id_user'] = $row['id']; // Menggunakan 'id' sesuai Screenshot 47

@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include 'config.php'; // Gunakan lagi config agar praktis
 
-// 1. CEK LOGIN
+
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");
     exit;
@@ -13,10 +13,10 @@ if (!isset($_SESSION['login'])) {
 
 $id_user = $_SESSION['id_user'];
 
-// 2. LOGIKA SIMPAN (Tetap di sini agar anti-layar putih)
+
 if (isset($_POST['update'])) {
     $id_edit = $_POST['id_transaksi'];
-    // Pakai escape string buat semua input text/string biar aman dari SQL Injection
+    
     $ket = mysqli_real_escape_string($conn, $_POST['keterangan']);
     $jml = (int)$_POST['jumlah']; // Pastikan jadi angka
     $kat = mysqli_real_escape_string($conn, $_POST['kategori']);
@@ -30,12 +30,12 @@ if (isset($_POST['update'])) {
                    WHERE id = '$id_edit' AND id_user = '$id_user'";
     
     if(mysqli_query($conn, $sql_update)) {
-        // Tambahin parameter biar di index bisa muncul notif sukses
+        
         header("Location: index.php?pesan=update_berhasil");
         exit;
     }
 }
-// 3. AMBIL DATA LAMA
+
 $id_get = $_GET['id'];
 $query_lama = mysqli_query($conn, "SELECT * FROM transaksi WHERE id = '$id_get' AND id_user = '$id_user'");
 $data = mysqli_fetch_assoc($query_lama);
@@ -45,7 +45,7 @@ if (!$data) {
     exit;
 }
 
-// 4. PANGGIL DEPENDENSI TAMPILAN
+
 include 'template/header.php';
 include 'template/sidebar.php';
 ?>

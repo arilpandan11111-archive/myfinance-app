@@ -2,12 +2,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Gunakan pengecekan agar tidak error jika element tidak ada di halaman lain
+  
     const chartElement = document.getElementById('myChart');
     if (chartElement) {
         const ctx = chartElement.getContext('2d');
         new Chart(ctx, {
-            type: 'bar', // Ubah ke 'bar' agar lebih jelas dibanding 'line'
+            type: 'bar', 
             data: {
                 labels: ['Total Pemasukan', 'Total Pengeluaran'],
                 datasets: [{

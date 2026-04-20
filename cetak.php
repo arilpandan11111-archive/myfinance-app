@@ -7,7 +7,6 @@ include 'config.php';
 if (!isset($_SESSION['login'])) { header("Location: login.php"); exit; }
 
 $id_user = $_SESSION['id_user'];
-// Perbaikan agar tidak muncul "Undefined array key" seperti di Screenshot 65
 $bulan_input = isset($_GET['bulan']) ? $_GET['bulan'] : date('m');
 $bulan = str_pad($bulan_input, 2, "0", STR_PAD_LEFT); 
 $tahun = date('Y');
@@ -26,7 +25,7 @@ $query = mysqli_query($conn, $sql);
 <head>
     <title>Lap_<?= $bulan ?>_<?= $id_user ?></title>
     <style>
-        /* Desain Custom - Biar gak kelihatan template banget */
+       
         body { font-family: 'Courier New', Courier, monospace; color: #333; line-height: 1.2; }
         .wrapper { width: 800px; margin: auto; padding: 30px; border: 1px solid #eee; }
         .header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }

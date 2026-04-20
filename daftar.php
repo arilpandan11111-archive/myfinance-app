@@ -6,18 +6,18 @@ if (isset($_POST['daftar'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
     
-    // Hash password agar aman (sesuai dengan password_verify di login)
+    
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Cek apakah username sudah ada
+    
     $cek_user = mysqli_query($conn, "SELECT * FROM users WHERE username='$username'");
     if (mysqli_num_rows($cek_user) > 0) {
         $error_user = true;
     } else {
-        // Masukkan ke database
+        
         $query = "INSERT INTO users (username, password) VALUES ('$username', '$password_hash')";
         if (mysqli_query($conn, $query)) {
-            // Jika berhasil, lempar ke login.php dengan pesan sukses
+            
             header("Location: login.php?pesan=berhasil");
             exit;
         }

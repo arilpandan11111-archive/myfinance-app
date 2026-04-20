@@ -1,7 +1,8 @@
 <nav class="col-md-2 d-none d-md-block sidebar bg-dark text-white p-3">
     <div class="text-center mb-4">
         <h4 class="fw-bold">💰 MyFinance</h4>
-        <small class="text-muted">Halo, <?= $_SESSION['user'] ?? 'User'; ?></small>
+        <small class="text-muted">Halo, <?= $_SESSION['username'] ?? 'User'; ?>
+    </small>
         <hr class="border-secondary">
     </div>
     <ul class="nav flex-column">
