@@ -1,0 +1,93 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+/* HALAMAN LOGIN */
+.login-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Warna Ungu Awal */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.login-box {
+    background: #ffffff !important;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.login-box h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.btn-ios {
+    width: 100%;
+    padding: 12px;
+    background: #5e72e4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.signup-link a {
+    color: #5e72e4;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* Tambahkan ini di style.css lu */
+.custom-input {
+    width: 100%;
+    padding: 14px 15px; /* Sedikit lebih lebar */
+    margin-bottom: 20px; /* Kasih jarak biar gak dempet */
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.custom-input:focus {
+    border-color: #667eea;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.2);
+}
+
+.btn-ios {
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-ios:hover {
+    background: #4e62d4;
+    transform: translateY(-2px);
+}
