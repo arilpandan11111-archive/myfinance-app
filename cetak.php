@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('Asia/Jakarta'); // Tambahin baris ini biar jamnya WIB!
+date_default_timezone_set('Asia/Jakarta'); 
 ob_start();
 session_start();
 include 'config.php';
@@ -51,7 +51,7 @@ $query = mysqli_query($conn, $sql);
 <body onload="window.print()">
     <div class="no-print" style="margin-bottom: 20px; text-align: center;">
         <button onclick="window.print()">PRINT LAPORAN</button>
-        <button onclick="window.close()">TUTUP</button>
+       <button onclick="window.location.href='index.php'">KEMBALI</button>
     </div>
 
     <div class="wrapper">

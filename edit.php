@@ -3,7 +3,7 @@ ob_start();
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include 'config.php'; // Gunakan lagi config agar praktis
+include 'config.php'; 
 
 
 if (!isset($_SESSION['login'])) {
@@ -16,12 +16,42 @@ $id_user = $_SESSION['id_user'];
 
 if (isset($_POST['update'])) {
     $id_edit = $_POST['id_transaksi'];
-    
     $ket = mysqli_real_escape_string($conn, $_POST['keterangan']);
-    $jml = (int)$_POST['jumlah']; // Pastikan jadi angka
+    $jml = (int)$_POST['jumlah']; 
     $kat = mysqli_real_escape_string($conn, $_POST['kategori']);
     $tip = mysqli_real_escape_string($conn, $_POST['tipe']);
 
+    // 1. VALIDASI: Angka tidak boleh 0 atau minus
+    if ($jml <= 0) {
+        // Kalimat lebih formal untuk gagal update karena simulasi saldo minus
+echo "<script>alert('Pembaruan Gagal: Perubahan data akan menyebabkan saldo menjadi negatif. Silakan periksa kembali nominal transaksi Anda.'); window.history.back();</script>";
+        exit;
+    }
+
+    // 2. HITUNG SALDO: Ambil total masuk & keluar transaksi LAIN (selain yang lagi di-edit)
+    $q_total = mysqli_query($conn, "SELECT 
+        SUM(CASE WHEN tipe='masuk' AND id != '$id_edit' THEN jumlah ELSE 0 END) as total_masuk_lain,
+        SUM(CASE WHEN tipe='keluar' AND id != '$id_edit' THEN jumlah ELSE 0 END) as total_keluar_lain
+        FROM transaksi WHERE id_user='$id_user'");
+    $d_total = mysqli_fetch_assoc($q_total);
+
+    $masuk_lain = $d_total['total_masuk_lain'] ?? 0;
+    $keluar_lain = $d_total['total_keluar_lain'] ?? 0;
+
+    // 3. SIMULASI: Hitung sisa saldo jika data baru ini disimpan
+    if ($tip == 'masuk') {
+        $simulasi_saldo = ($masuk_lain + $jml) - $keluar_lain;
+    } else {
+        $simulasi_saldo = $masuk_lain - ($keluar_lain + $jml);
+    }
+
+    // 4. CEK: Jika hasil simulasi bikin minus, batalkan!
+    if ($simulasi_saldo < 0) {
+        echo "<script>alert('Gagal Update! Perubahan ini akan menyebabkan saldo minus (Sisa: Rp " . number_format($simulasi_saldo) . ").'); window.history.back();</script>";
+        exit;
+    }
+
+    // 5. Jika aman, baru jalankan UPDATE
     $sql_update = "UPDATE transaksi SET 
                    keterangan = '$ket', 
                    jumlah = '$jml', 
@@ -30,8 +60,7 @@ if (isset($_POST['update'])) {
                    WHERE id = '$id_edit' AND id_user = '$id_user'";
     
     if(mysqli_query($conn, $sql_update)) {
-        
-        header("Location: index.php?pesan=update_berhasil");
+        header("Location: transaksi.php?pesan=update_berhasil");
         exit;
     }
 }
@@ -71,7 +100,8 @@ include 'template/sidebar.php';
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-muted">Jumlah (Rp)</label>
-                    <input type="number" name="jumlah" class="form-control form-control-lg bg-light" value="<?= $data['jumlah'] ?>" required>
+                    <!-- Cari input jumlah di transaksi.php dan edit.php, pastikan seperti ini -->
+<input type="number" name="jumlah" class="form-control form-control-lg bg-light" value="<?= $data['jumlah'] ?>" min="1" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-muted">Kategori</label>
