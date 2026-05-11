@@ -20,7 +20,7 @@ include 'template/sidebar.php';
         <h2>Manajemen Transaksi</h2>
     </div>
 
-    <!-- Alert Sistem -->
+    
     <?php if (isset($_GET['pesan'])): ?>
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             <strong>Sistem:</strong> <?= ucfirst(str_replace('_', ' ', $_GET['pesan'])) ?>
@@ -28,7 +28,7 @@ include 'template/sidebar.php';
         </div>
     <?php endif; ?>
 
-    <!-- Form Tambah Transaksi -->
+    
     <div class="card p-4 mb-4 shadow-sm border-0 bg-light">
         <h6 class="fw-bold mb-3">Tambah Transaksi Baru</h6>
         <form action="proses.php" method="POST" class="row g-2">
@@ -55,7 +55,7 @@ include 'template/sidebar.php';
         </form>
     </div>
 
-    <!-- Tabel Riwayat -->
+    
     <div class="card p-4 shadow-sm mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0"><i class="fas fa-history me-2"></i>Riwayat Transaksi</h5>
@@ -71,9 +71,7 @@ include 'template/sidebar.php';
                     ?>
                 </select>
                 <button type="submit" class="btn btn-sm btn-primary">Filter</button>
-                <a href="cetak.php?bulan=<?= ($filter_bulan != '') ? $filter_bulan : date('m') ?>" target="_blank" class="btn btn-sm btn-success">
-                    <i class="fas fa-print"></i> Cetak
-                </a>
+               
             </form>
         </div>
 
